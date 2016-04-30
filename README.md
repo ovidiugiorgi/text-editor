@@ -9,3 +9,10 @@ The editor has the following features:
   - switch between tabs and create/delete tabs.
 
 The purpose of this project was to practice OOP design and techniques.
+
+To run it, type in the following:
+
+```
+make
+./editor
+```
