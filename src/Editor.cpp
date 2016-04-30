@@ -3,8 +3,8 @@
 Editor::Editor() 
 {
   Tab* tab = new Tab();
-  _tabs["Untitled"] = tab;
-  _names.push_back("Untitled");
+  _tabs["untitled"] = tab;
+  _names.push_back("untitled");
   _activeTab = tab;
 }
 
