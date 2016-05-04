@@ -1,18 +1,13 @@
-# text-editor
+# Text Editor
 
-Text editor written in C++.
+## Features:
+  - Insert, edit and erase strings in a text
+  - Undo and redo operations
+  - Multiple tabs
 
-The editor has the following features:
-  - insert, edit, erase strings in a text;
-  - undo and redo operations;
-  - have multiple tabs open;
-  - switch between tabs and create/delete tabs.
-
-The purpose of this project was to practice OOP design and techniques.
-
-To run it, type in the following:
+## Usage
 
 ```
-make
-./editor
+$ make
+$ ./Editor.out
 ```
