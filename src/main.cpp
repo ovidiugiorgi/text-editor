@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Editor* Editor::t_instance = 0; 
+Editor* Editor::t_instance = 0;
 
 int extractPosBegin(const string &s)
 {
@@ -92,6 +92,7 @@ void help()
   cout << "ACTIVE_TAB" << "\n";
   cout << "TABS" << "\n";
   cout << "HELP" << "\n";
+  cout << "CLEAR" << "\n";
   cout << "EXIT" << "\n";
 
   cout << "\n";
@@ -113,10 +114,10 @@ int main()
     posBegin = posEnd = 0;
     s.clear();
 
-    if (command.find("INSERT") != string::npos) {    
+    if (command.find("INSERT") != string::npos) {
       posBegin = extractPosBegin(command);
       s = extractString(command);
-  
+
       Operation* op = new Insert(posBegin, s);
       Editor::Instance()->GetActiveTab()->Do(op);
     } else if (command.find("ERASE") != string::npos) {
@@ -160,6 +161,8 @@ int main()
         Editor::Instance()->ShowTabs();
     } else if (command == "HELP") {
       help();
+    } else if (command == "CLEAR") {
+      cout << string( 100, '\n' );
     } else {
       if (command != "EXIT") {
         cout << "Invalid command, type HELP for the available actions\n";
