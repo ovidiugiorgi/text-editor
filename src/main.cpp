@@ -79,21 +79,21 @@ void help()
     cout << "-";
   }
   cout << "\n\n";
-  cout << "INSERT Pos \"text\"" << "\n";
-  cout << "ERASE LeftPos RightPos" << "\n";
-  cout << "EDIT LeftPos RightPos \"text\"" << "\n";
-  cout << "UNDO" << "\n";
-  cout << "REDO" << "\n";
-  cout << "SHOW" << "\n";
-  cout << "LENGTH" << "\n";
-  cout << "CREATE_TAB" << "\n";
-  cout << "DELETE_TAB" << "\n";
-  cout << "SWITCH_TAB" << "\n";
-  cout << "ACTIVE_TAB" << "\n";
-  cout << "TABS" << "\n";
-  cout << "HELP" << "\n";
-  cout << "CLEAR" << "\n";
-  cout << "EXIT" << "\n";
+  cout << "insert <pos> <text>" << "\n";
+  cout << "erase <left_pos> <right_pos>" << "\n";
+  cout << "edit <left_pos> <right_pos> <text>" << "\n";
+  cout << "undo" << "\n";
+  cout << "redo" << "\n";
+  cout << "show" << "\n";
+  cout << "length" << "\n";
+  cout << "tab_create" << "\n";
+  cout << "tab_del" << "\n";
+  cout << "tab_switch <tab_name>" << "\n";
+  cout << "tab_active" << "\n";
+  cout << "tab" << "\n";
+  cout << "help" << "\n";
+  cout << "clear" << "\n";
+  cout << "exit" << "\n";
 
   cout << "\n";
 }
@@ -114,34 +114,34 @@ int main()
     posBegin = posEnd = 0;
     s.clear();
 
-    if (command.find("INSERT") != string::npos) {
+    if (command.find("insert") != string::npos) {
       posBegin = extractPosBegin(command);
       s = extractString(command);
 
       Operation* op = new Insert(posBegin, s);
       Editor::Instance()->GetActiveTab()->Do(op);
-    } else if (command.find("ERASE") != string::npos) {
+    } else if (command.find("erase") != string::npos) {
       posBegin = extractPosBegin(command);
       posEnd = extractPosEnd(command);
 
       Operation* op = new Erase(posBegin, posEnd);
       Editor::Instance()->GetActiveTab()->Do(op);
-    } else if (command.find("EDIT") != string::npos) {
+    } else if (command.find("edit") != string::npos) {
       posBegin = extractPosBegin(command);
       posEnd = extractPosEnd(command);
       s = extractString(command);
 
       Operation* op = new Edit(posBegin, posEnd, s);
       Editor::Instance()->GetActiveTab()->Do(op);
-    } else if (command == "UNDO") {
+    } else if (command == "undo") {
       Editor::Instance()->GetActiveTab()->Undo();
-    } else if (command == "REDO") {
+    } else if (command == "redo") {
       Editor::Instance()->GetActiveTab()->Redo();
-    } else if (command == "SHOW") {
+    } else if (command == "show") {
       cout << Editor::Instance()->GetActiveTab()->GetText() << "\n";
-    } else if (command == "LENGTH") {
+    } else if (command == "length") {
       cout << Editor::Instance()->GetActiveTab()->GetText().length() << "\n";
-    } else if (command.find("CREATE_TAB") != string::npos) {
+    } else if (command.find("tab_create") != string::npos) {
       string tabName = extractString(command);
       string text = extractTabText(command);
       if (text.empty()) {
@@ -149,26 +149,26 @@ int main()
       } else {
         Editor::Instance()->AddTab(tabName, text);
       }
-    } else if (command.find("DELETE_TAB") != string::npos) {
+    } else if (command.find("tab_del") != string::npos) {
       string tabName = extractString(command);
       Editor::Instance()->DeleteTab(tabName);
-    }  else if (command.find("SWITCH_TAB") != string::npos) {
+    }  else if (command.find("tab_switch") != string::npos) {
       string tabName = extractString(command);
       Editor::Instance()->SetActiveTab(tabName);
-    } else if (command == "ACTIVE_TAB") {
+    } else if (command == "tab_active") {
       cout << Editor::Instance()->GetActiveTabName() << "\n";
-    } else if (command == "TABS") {
+    } else if (command == "tab") {
         Editor::Instance()->ShowTabs();
-    } else if (command == "HELP") {
+    } else if (command == "help") {
       help();
-    } else if (command == "CLEAR") {
+    } else if (command == "clear") {
       cout << string( 100, '\n' );
     } else {
-      if (command != "EXIT") {
-        cout << "Invalid command, type HELP for the available actions\n";
+      if (command != "exit") {
+        cout << "Invalid command, type help for more information\n";
       }
     }
-  } while (command != "EXIT");
+  } while (command != "exit");
 
   return 0;
 }
