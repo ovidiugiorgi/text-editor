@@ -1,5 +1,7 @@
 #include "Editor.h"
 
+#include <fstream>
+
 using namespace std;
 
 Editor* Editor::t_instance = 0;
@@ -93,6 +95,7 @@ void help()
   cout << "tab" << "\n";
   cout << "help" << "\n";
   cout << "clear" << "\n";
+  cout << "save" << "\n";
   cout << "exit" << "\n";
 
   cout << "\n";
@@ -163,6 +166,13 @@ int main()
       help();
     } else if (command == "clear") {
       cout << string( 100, '\n' );
+    } else if (command == "save") {
+      string fileName = Editor::Instance()->GetActiveTabName() + ".txt";
+      ofstream fout(fileName);
+      fout << Editor::Instance()->GetActiveTab()->GetText();
+      fout.close();
+
+      cout << "File saved!\n";
     } else {
       if (command != "exit") {
         cout << "Invalid command, type help for more information\n";
