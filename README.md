@@ -1,11 +1,11 @@
 # Text Editor
 
-## Features
+### Features
   - Insert, edit and erase strings in a text
   - Undo and redo operations
   - Multiple tabs
 
-## Usage
+### Usage
 
 ```
 $ make
